@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ReSellit crosslisting · full version demo</title>
+<meta name="description" content="Crosslist a ReSellit item to six marketplaces, detect a sale and remove the other listings.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/instrument.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css">
+
+</head>
+<body class="wide">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="/"><svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><path d="M8 3h21a2 2 0 0 1 2 2v24a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z" fill="#1c1b19"/><circle cx="9" cy="9" r="2.4" fill="#f4f1ea"/><path d="M12 25V12h5.2c2.6 0 4.3 1.5 4.3 3.8 0 1.7-.9 2.9-2.4 3.4l3 5.8h-3.2l-2.6-5.3H15V25zm3-7.6h2c1 0 1.6-.6 1.6-1.5S18 14.4 17 14.4h-2z" fill="#f4f1ea"/><circle cx="27" cy="27" r="5" fill="#c2410c"/></svg><span>ReSellit Lister<small>Full version · 6 marketplaces</small></span></a>
+<nav class="nav" aria-label="Main"><a href="/" aria-current="page">Demo</a><a href="/marketplaces/">Marketplaces</a><a href="/plan/">Plan</a><a href="/results/">Measured</a></nav>
+<span class="demo-flag">Demo · fictional data</span>
+</div></header>
+<main id="main">
+
+<section class="hero"><div class="wrap grid2">
+  <div>
+    <p class="eyebrow">Full version · preview</p>
+    <h1>Crosslist once. Sold once. Removed everywhere else.</h1>
+    <p class="lede">The Phase 1 engine, extended:</p>
+    <ul class="lede" style="margin:0 0 1em;padding-left:1.2em">
+      <li>browser forms for Poshmark, Mercari, Depop, Vinted and Facebook Marketplace;</li>
+      <li>eBay’s official API;</li>
+      <li>a sale check that sees when an item sells;</li>
+      <li>removing the other listings once you approve.</li>
+    </ul>
+    <div class="btns"><a class="btn hot" href="#demo">Run the demo</a><a class="btn alt" href="/marketplaces/">Each marketplace’s rules</a></div>
+  </div>
+  <div class="facts">
+    <div class="fact"><b>6</b><span>marketplaces from one draft</span></div>
+    <div class="fact"><b>0.51 s</b><span>to remove the other 5 listings after a sale (test forms)</span></div>
+    <div class="fact"><b>5 + 1</b><span>browser forms + eBay API</span></div>
+    <div class="fact"><b>0</b><span>duplicate listings created</span></div>
+  </div>
+</div></section>
+
+<section class="sec" id="demo"><div class="wrap">
+  <h2>Four scenarios</h2>
+  <p class="muted" style="max-width:78ch">Same engine as Phase 1, running in this page. Marketplace forms are <b>test doubles</b> shaped like each marketplace’s listing fields. The eBay calls are built by the real request builder, but the responses are <b>mocked</b>, so no call reaches eBay.</p>
+  <div class="scenarios four" role="group" aria-label="Scenarios">
+    <button class="scn" type="button" data-scn="crosslist" aria-pressed="false"><i>1</i><b>Crosslist to six</b><span>5 forms + eBay API</span></button>
+    <button class="scn" type="button" data-scn="sold" aria-pressed="false"><i>2</i><b>Sold on Mercari</b><span>Found, then removed elsewhere</span></button>
+    <button class="scn" type="button" data-scn="double" aria-pressed="false"><i>3</i><b>Two buyers at once</b><span>Double sale flagged</span></button>
+    <button class="scn" type="button" data-scn="limits" aria-pressed="false"><i>4</i><b>Each marketplace’s rules</b><span>Titles, photos, prices</span></button>
+  </div>
+  <div class="guide" role="status"><p id="guide-text"></p><div class="btns"><span id="guide-extra"></span><button type="button" class="btn sm alt" id="sim-reset">Restart</button></div></div>
+  <div class="workspace">
+    <div id="sim-app" aria-label="ReSellit stand-in"></div>
+    <div class="right-col">
+      <div id="sim-browser" aria-label="Simulated browser"></div>
+      <div class="api"><h3>eBay API console · mocked responses</h3><ol id="ebay-log" tabindex="0" aria-label="API calls"><li class="empty">No API calls yet.</li></ol></div>
+    </div>
+  </div>
+  <div class="side3">
+    <div class="card"><h3>Marketplace side</h3><div id="market-side"></div></div>
+    <div class="card"><h3>ReSellit sale check</h3>
+      <p class="small muted">The extension reads your sold items on each browser marketplace while Chrome is open, and eBay orders through its API. Production: every 10–15 minutes. Here: every 8 seconds.</p>
+      <div class="watch-row"><button type="button" class="btn sm" id="check-now">Check for sales now</button><label><input type="checkbox" id="auto" checked> automatic</label></div>
+      <p class="small mono" id="watch" role="status"></p>
+    </div>
+    <div class="card"><h3>Sales ledger</h3><div id="ledger"><p class="small muted">No sales yet.</p></div></div>
+  </div>
+  <div class="receipt" style="margin-top:16px"><h3>Activity log</h3><ol id="sim-log" tabindex="0" aria-label="Log entries"><li class="empty">Nothing yet.</li></ol></div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <h2 id="preview-title">What each marketplace receives</h2>
+  <div id="preview"></div>
+  <p class="small muted" style="margin-top:10px">Changes are shown before anything is sent. Limits and their sources: <a href="/marketplaces/">Marketplaces</a>.</p>
+</div></section>
+</main>
+<footer class="foot"><div class="wrap">
+<p>ReSellit Lister · full-version preview: crosslisting, sale tracking and removing sold items everywhere else.</p>
+<p>Fictional products and brands. Marketplace forms here are test doubles, not the real sites.</p>
+</div></footer>
+<script type="module" src="/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Measured · ReSellit crosslisting</title>
+<meta name="description" content="What the full-version demo was tested on.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/instrument.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css">
+
+</head>
+<body class="">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="/"><svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><path d="M8 3h21a2 2 0 0 1 2 2v24a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z" fill="#1c1b19"/><circle cx="9" cy="9" r="2.4" fill="#f4f1ea"/><path d="M12 25V12h5.2c2.6 0 4.3 1.5 4.3 3.8 0 1.7-.9 2.9-2.4 3.4l3 5.8h-3.2l-2.6-5.3H15V25zm3-7.6h2c1 0 1.6-.6 1.6-1.5S18 14.4 17 14.4h-2z" fill="#f4f1ea"/><circle cx="27" cy="27" r="5" fill="#c2410c"/></svg><span>ReSellit Lister<small>Full version · 6 marketplaces</small></span></a>
+<nav class="nav" aria-label="Main"><a href="/">Demo</a><a href="/marketplaces/">Marketplaces</a><a href="/plan/">Plan</a><a href="/results/" aria-current="page">Measured</a></nav>
+<span class="demo-flag">Demo · fictional data</span>
+</div></header>
+<main id="main">
+
+<section class="hero"><div class="wrap">
+  <p class="eyebrow">Measured</p>
+  <h1>What the full-version demo was tested on.</h1>
+  <p class="lede">A Playwright script ran the four scenarios on this page in Chromium. The Phase 1 site also has the run with the real extension installed. Run on 2026-11-11.</p>
+</div></section>
+<section class="sec"><div class="wrap">
+  <div class="tbl-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways on small screens"><table><thead><tr><th>Check</th><th>Result</th><th>How</th></tr></thead><tbody><tr><td>Scenario checks</td><td class="num">11/11</td><td>four scenarios scripted in Chromium</td></tr><tr><td>Crosslist one item to six</td><td class="num">3.44 s</td><td>eBay live via API (mocked responses) + 5 forms filled and waiting</td></tr><tr><td>Sale found by the sale check</td><td class="num">0.38 s</td><td>reads each marketplace’s sold items; eBay orders polled</td></tr><tr><td>Removed from the other five</td><td class="num">5/5 in 0.51 s</td><td>after the seller’s OK, one at a time</td></tr><tr><td>Two buyers at once</td><td class="num">second sale flagged, 4/4 removed</td><td>first sale kept, the other marked to cancel</td></tr><tr><td>Duplicate listings</td><td class="num">0</td><td>every marketplace’s listings counted per SKU/title</td></tr><tr><td>eBay request bodies</td><td class="num">unit-tested</td><td>Inventory item (PUT by SKU), offer, publish, withdraw, orders</td></tr><tr><td>Accessibility and layout</td><td class="num">0 issues in 50 scans</td><td>shared with the Phase 1 site</td></tr><tr><td>Lighthouse (perf / a11y / best practices)</td><td class="num">100 / 100 / 100</td><td>median of 3, mobile LCP 0.77 s, CLS 0</td></tr></tbody></table></div>
+</div></section>
+<section class="sec"><div class="wrap"><h2>Not measured</h2><ul class="list-check list-x" style="max-width:85ch">
+  <li>Any real marketplace. Forms are test doubles, and eBay responses are mocked; the eBay request bodies come from the real builder.</li>
+  <li>eBay sandbox or production. That needs your eBay developer keys and business policies.</li>
+  <li>Partner APIs (Depop, Vinted Pro). Access depends on your account being approved.</li>
+  <li>How each marketplace reacts to frequent sale checks on a real account.</li>
+</ul></div></section>
+</main>
+<footer class="foot"><div class="wrap">
+<p>ReSellit Lister · full-version preview: crosslisting, sale tracking and removing sold items everywhere else.</p>
+<p>Fictional products and brands. Marketplace forms here are test doubles, not the real sites.</p>
+</div></footer>
+
+</body>
+</html>

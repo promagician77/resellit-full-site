@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan · ReSellit crosslisting</title>
+<meta name="description" content="Order of marketplaces, sales tracking trade-offs and what stays manual.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/instrument.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css">
+
+</head>
+<body class="">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="/"><svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><path d="M8 3h21a2 2 0 0 1 2 2v24a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z" fill="#1c1b19"/><circle cx="9" cy="9" r="2.4" fill="#f4f1ea"/><path d="M12 25V12h5.2c2.6 0 4.3 1.5 4.3 3.8 0 1.7-.9 2.9-2.4 3.4l3 5.8h-3.2l-2.6-5.3H15V25zm3-7.6h2c1 0 1.6-.6 1.6-1.5S18 14.4 17 14.4h-2z" fill="#f4f1ea"/><circle cx="27" cy="27" r="5" fill="#c2410c"/></svg><span>ReSellit Lister<small>Full version · 6 marketplaces</small></span></a>
+<nav class="nav" aria-label="Main"><a href="/">Demo</a><a href="/marketplaces/">Marketplaces</a><a href="/plan/" aria-current="page">Plan</a><a href="/results/">Measured</a></nav>
+<span class="demo-flag">Demo · fictional data</span>
+</div></header>
+<main id="main">
+
+<section class="hero"><div class="wrap">
+  <p class="eyebrow">Plan</p>
+  <h1>Adding marketplaces without rewriting Phase 1.</h1>
+  <p class="lede">The engine from Phase 1 is shared: duplicate rules, mapping, fill engine, link capture and outbox. Each new marketplace adds one adapter, its mapping rules, a sale check and removal steps.</p>
+</div></section>
+<section class="sec"><div class="wrap">
+  <h2>Suggested order</h2>
+  <div class="phases">
+    <div class="phase"><span class="n">Step 1</span><h3>eBay (API)</h3><ul><li>OAuth connect, business policies, category suggestions</li><li>List, withdraw, poll orders</li><li>Most reliable sales signal of the six</li></ul></div>
+    <div class="phase"><span class="n">Step 2</span><h3>Mercari</h3><ul><li>Browser adapter: 12 photos, 1,000-character description</li><li>No SKU field: lost-link check matches title + price</li></ul></div>
+    <div class="phase"><span class="n">Step 3</span><h3>Depop</h3><ul><li>No title field: title leads the description</li><li>8 photos, SKU up to 50</li><li>Partner API if approved</li></ul></div>
+    <div class="phase"><span class="n">Step 4</span><h3>Vinted</h3><ul><li>20 photos</li><li>Identical items can’t be listed twice</li><li>Pro Integrations if allowlisted</li></ul></div>
+    <div class="phase"><span class="n">Step 5</span><h3>Facebook Marketplace</h3><ul><li>10 photos, aria-labelled form</li><li>Local pickup sales leave no reliable sold signal: you mark it sold in ReSellit</li></ul></div>
+    <div class="phase"><span class="n">Then</span><h3>Sales and removal</h3><ul><li>Sale check per marketplace, ledger in ReSellit</li><li>Remove the rest after your OK</li><li>Double-sale alert</li></ul></div>
+  </div>
+</div></section>
+<section class="sec"><div class="wrap two">
+  <div><h2>Removing sold items: the honest trade-off</h2><p>Only eBay can report a sale to ReSellit; on the other marketplaces the extension checks your sold items while Chrome is open. The gap between checks is when a second buyer can purchase the same item. Scenario 3 shows how ReSellit flags that.</p><p>Shorter checks narrow the gap but mean more page loads on your account. A 10–15 minute check while you work is the suggested start.</p><p>Removals run one at a time, and only after you approve them. Poshmark dropped its Excessive Listing Removal Policy on July 23, 2026, so deleting an item that sold elsewhere isn’t penalized. “Not For Sale” is still a softer option.</p></div>
+  <div><h2>What stays manual, on purpose</h2><ul class="list-check">
+    <li>Pressing List on browser marketplaces: you review each form.</li>
+    <li>Approving removals after a sale.</li>
+    <li>Cancelling the second order in a double sale.</li>
+    <li>Marking a Facebook pickup sale as sold.</li>
+  </ul></div>
+</div></section>
+</main>
+<footer class="foot"><div class="wrap">
+<p>ReSellit Lister · full-version preview: crosslisting, sale tracking and removing sold items everywhere else.</p>
+<p>Fictional products and brands. Marketplace forms here are test doubles, not the real sites.</p>
+</div></footer>
+
+</body>
+</html>

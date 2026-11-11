@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marketplaces · ReSellit crosslisting</title>
+<meta name="description" content="Route, official API, limits, sale signal and removal for Poshmark, eBay, Mercari, Depop, Vinted and Facebook Marketplace.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/instrument.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css">
+
+</head>
+<body class="">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="/"><svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><path d="M8 3h21a2 2 0 0 1 2 2v24a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z" fill="#1c1b19"/><circle cx="9" cy="9" r="2.4" fill="#f4f1ea"/><path d="M12 25V12h5.2c2.6 0 4.3 1.5 4.3 3.8 0 1.7-.9 2.9-2.4 3.4l3 5.8h-3.2l-2.6-5.3H15V25zm3-7.6h2c1 0 1.6-.6 1.6-1.5S18 14.4 17 14.4h-2z" fill="#f4f1ea"/><circle cx="27" cy="27" r="5" fill="#c2410c"/></svg><span>ReSellit Lister<small>Full version · 6 marketplaces</small></span></a>
+<nav class="nav" aria-label="Main"><a href="/">Demo</a><a href="/marketplaces/" aria-current="page">Marketplaces</a><a href="/plan/">Plan</a><a href="/results/">Measured</a></nav>
+<span class="demo-flag">Demo · fictional data</span>
+</div></header>
+<main id="main">
+
+<section class="hero"><div class="wrap">
+  <p class="eyebrow">Marketplaces</p>
+  <h1>Six marketplaces, six sets of rules.</h1>
+  <p class="lede">How each one is reached in this design, what its official API offers today, the limits the mapper enforces, and how a sale is seen and a listing removed. Each limit lists its source.</p>
+</div></section>
+<section class="sec"><div class="wrap">
+  <div class="tbl-wrap" tabindex="0" role="region" aria-label="Table, scrolls sideways on small screens"><table class="matrix">
+    <thead><tr><th>Marketplace</th><th>Route</th><th>Official API today</th><th>Limits applied</th><th>SKU field</th><th>How a sale is seen</th><th>How it’s removed</th><th>Sources</th></tr></thead>
+    <tbody><tr><td>Poshmark</td><td class="route-browser">Browser form + your click</td><td>No public listing API. Bulk Upload (CSV) exists for Posh Ambassadors and Brand Partners only.</td><td>title 80 · description 1,500 · 16 photos · whole dollars</td><td>✓</td><td>No sale notifications to third parties: check the seller’s sold items while the browser is open.</td><td>Delete the listing or set Availability to Not For Sale.</td><td class="src">Poshmark Support (Bulk Upload Templates); Nifty and Spadeberry seller guides; Poshmark Support</td></tr><tr><td>eBay</td><td class="route-api">Official API</td><td>Sell Inventory API + Media API (OAuth). Listings are created without a browser.</td><td>title 80 · description: no published limit · 24 photos</td><td>✓</td><td>Notification API (ORDER_CONFIRMATION) needs a public HTTPS endpoint; a local ReSellit polls Fulfillment getOrders instead.</td><td>Withdraw the offer through the Inventory API.</td><td class="src">eBay seller guidance; Spadeberry eBay guide</td></tr><tr><td>Mercari</td><td class="route-browser">Browser form + your click</td><td>No public seller API.</td><td>title 80 · description 1,000 · 12 photos</td><td>—</td><td>Check sold items while the browser is open.</td><td>Deactivate or delete the listing.</td><td class="src">Mercari blog; Mercari Help Center</td></tr><tr><td>Depop</td><td class="route-browser">Browser form + your click</td><td>Selling API for approved partners (partner-gated); browser route otherwise.</td><td>no title field · description 1,000 · 8 photos</td><td>✓</td><td>Partner API sends webhooks; browser route checks sold items.</td><td>Delete the listing.</td><td class="src">Spadeberry and Closo; Spadeberry Depop guide</td></tr><tr><td>Vinted</td><td class="route-browser">Browser form + your click</td><td>Vinted Pro Integrations: allowlisted Pro businesses only, 4–6 week setup.</td><td>title: no published limit · description: no published limit · 20 photos</td><td>—</td><td>Check sold items while the browser is open.</td><td>Delete the listing.</td><td class="src">Vinted Help Centre</td></tr><tr><td>Facebook Marketplace</td><td class="route-browser">Browser form + your click</td><td>No public Marketplace API for individual sellers (partner catalog APIs only).</td><td>title: no published limit · description: no published limit · 10 photos</td><td>—</td><td>No sold signal for most sales (local pickup); the seller marks it sold.</td><td>Mark as sold or delete.</td><td class="src">Seller guides (not an official Meta page)</td></tr></tbody>
+  </table></div>
+</div></section>
+<section class="sec"><div class="wrap two">
+  <div><h2>Why eBay is different</h2><p>eBay has an official seller API, so it needs no browser at all:</p>
+    <ul>
+      <li>listings are created with its Inventory API, keyed by SKU;</li>
+      <li>photos go to eBay Picture Services through its Media API;</li>
+      <li>a listing is removed by withdrawing the offer.</li>
+    </ul>
+    <p>eBay’s user agreement explicitly bars automated agents and bots, so eBay should never go through a browser form. One catch remains: eBay’s push notifications need a public HTTPS endpoint, and ReSellit runs locally, so the design polls orders instead.</p></div>
+  <div><h2>Partner APIs worth asking about</h2><p><b>Depop</b> has a Selling API for approved partners, and <b>Vinted</b> has Pro Integrations for allowlisted Pro businesses (4–6 week setup). If your account qualifies for either, that marketplace moves from the browser route to the API route. The ReSellit side stays the same, because each marketplace sits behind one adapter.</p></div>
+</div></section>
+</main>
+<footer class="foot"><div class="wrap">
+<p>ReSellit Lister · full-version preview: crosslisting, sale tracking and removing sold items everywhere else.</p>
+<p>Fictional products and brands. Marketplace forms here are test doubles, not the real sites.</p>
+</div></footer>
+
+</body>
+</html>

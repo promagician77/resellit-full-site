@@ -1,0 +1,10 @@
+{
+  "name": "resellit-lister-demo-full",
+  "private": true,
+  "version": "1.0.0",
+  "description": "ReSellit Lister demo: Full version · 6 marketplaces. Prebuilt static site in site/.",
+  "scripts": {
+    "build": "echo 'prebuilt: site/ is committed'",
+    "start": "npx --yes serve site"
+  }
+}
